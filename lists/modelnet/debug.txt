@@ -1,0 +1,10 @@
+toilet	0010
+table	0009
+sofa	0010
+night_stand	0009
+dresser	0010
+chair	0009
+bed	0009
+bathtub	0006
+monitor	0004
+desk	0003

@@ -1,0 +1,22 @@
+TEST:
+    name: modelnet_outlier_99
+SETTINGS:
+    data_path:
+DATA:
+    dataset: modelnet
+    key: outlier_blob_depth
+    test_list: lists/modelnet/test.txt
+    resx: 320
+    resy: 240
+    noise_scale: 0.01
+    outlier_scale: 5
+    outlier_fraction: 0.95
+    grid_resolution: 128
+    grid_resolution_load: 128
+    evaluation_resolution: 128
+    feature_grid_resolution: 128
+    load_smooth: True
+    sparsity: 0.01
+TESTING:
+    shuffle: True
+    batch_size: 1

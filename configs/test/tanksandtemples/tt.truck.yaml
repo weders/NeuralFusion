@@ -1,0 +1,30 @@
+TEST:
+    name: tanks_and_temples_truck
+SETTINGS:
+    data_path: /cluster/project/infk/cvg/weders/data/tankstemples/training/
+DATA:
+    root_dir: /cluster/project/infk/cvg/weders/data/tankstemples/training
+    dataset: tankstemples
+    key: depth
+    scene: truck
+    resx: 320
+    resy: 240
+    stereo_method: geometric
+    min_depth: 1.
+    max_depth: 3.
+    noise_scale: 0.005
+    outlier_scale: 3
+    outlier_fraction: 0.99
+    grid_resolution: 64
+    grid_resolution_load: 64
+    evaluation_resolution: 64
+    feature_grid_resolution: 64
+    samples: 500
+DATABASE:
+    grid_resolution: 64
+    grid_resolution_load: 64
+    evaluation_resolution: 64
+    feature_grid_resolution: 64
+TESTING:
+    shuffle: False
+    batch_size: 1

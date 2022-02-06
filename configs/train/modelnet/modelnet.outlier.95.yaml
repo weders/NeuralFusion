@@ -1,0 +1,133 @@
+SETTINGS:
+  name: modelnet_outliers_95
+DATA:
+  key: outlier_blob_depth
+  dataset: modelnet
+  train_list: lists/modelnet/train.txt
+  val_list: lists/modelnet/val.txt
+  test_list: lists/modelnet/test.txt
+  resx: 320
+  resy: 240
+  grid_resolution: 128
+  grid_resolution_load: 128
+  evaluation_resolution: 128
+  feature_grid_resolution: 128
+  noise: 0.001
+  noise_scale: 0.01
+  outlier_scale: 5
+  outlier_fraction: 0.95
+  load_smooth: False
+  sparsity: 0.01
+DATABASE:
+  repeat: 10
+  n_features: 9
+  grid_resolution: 128
+  grid_resolution_load: 128
+  evaluation_resolution: 128
+  feature_grid_resolution: 128
+PIPELINE:
+  use_count_renderer: True
+  use_count: True
+  minimal_gpu: False
+  n_features: 9
+  routing: False
+  routing_threshold: 0.8
+  superresolution: False
+  update: True
+  renderer: standard
+  FUSION:
+    # fusion pipeline options
+    n_samples: 3
+    n_layers: 4
+    extraction: nearest
+    integration: nearest
+    # model options
+    net: FusionNet
+    activation: torch.nn.Tanh()
+    normalization: layer
+    encoder_filter_size: 3
+    uncertainty: False
+    depth: True
+    position: False
+    direction: True
+    resx: 320
+    resy: 240
+  RENDERER:
+    kernel: 5
+    superresolve: False
+    activation: torch.nn.Tanh()
+    sdf_head: True
+    occ_head: True
+    normal_head: False
+    conf_head: False
+    output_scale: 0.02
+    mode: float
+LOSS:
+  reinitialize: False
+  mask: all
+  mask_dilation_iterations: 0
+  sdf: False
+  cls: True
+  scale: True
+  clamp: True
+  clamp_est: False
+  max_clamp: 0.02
+  min_clamp: -0.02
+  wl2: 10.
+  wl1: 1.
+  wlocc: 0.01
+  scale: 1000.
+  wlreg: 1.
+  latent_reg: True
+OPTIMIZATION:
+  curriculum: False
+  mask_switch: 0
+  scheduler:
+    schedule: True
+    gamma: 0.999
+    mode: max
+    patience: 20
+    threshold: 0.01
+    threshold_mode: rel
+    cooldown: 5
+  clip: True
+  joint: False
+  alternate: False
+  frequency: 5
+  burn_in: 10
+  pipeline:
+    start: 0
+    lr: 1.e-02
+    weight_decay: 0.00
+    momentum: 0.9
+    alpha: 0.99
+    eps: 1.e-10
+    step_size: 2000
+  renderer:
+    start: 10
+    lr: 1.e-02
+    weight_decay: 0.00
+    momentum: 0.9
+    alpha: 0.99
+    eps: 1.e-10
+    step_size: 2000
+TRAINING:
+  latent_noise: False
+  shuffle: True
+  oversampling: False
+  interpolation: True
+  batch_size: 1
+  stop_batch: -1
+  accumulate_steps: 8
+  n_epochs: 200
+  n_points: 4
+VALIDATION:
+  shuffle: True
+  batch_size: 1
+TESTING:
+  prefix: configs/tests
+  tests:
+    - shapenet.plane.noise.00.yaml
+    - shapenet.plane.noise.005.yaml
+  shuffle: False
+  batch_size: 1

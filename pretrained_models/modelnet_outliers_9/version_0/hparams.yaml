@@ -1,0 +1,293 @@
+config: !!python/object/new:easydict.EasyDict
+  dictitems:
+    DATA: &id007 !!python/object/new:easydict.EasyDict
+      dictitems:
+        dataset: modelnet
+        evaluation_resolution: 128
+        feature_grid_resolution: 128
+        grid_resolution: 128
+        grid_resolution_load: 128
+        key: outlier_blob_depth
+        load_smooth: false
+        noise: 0.001
+        noise_scale: 0.01
+        outlier_fraction: 0.9
+        outlier_scale: 5
+        resx: 320
+        resy: 240
+        sparsity: 0.01
+        test_list: lists/modelnet/test.txt
+        train_list: lists/modelnet/train.txt
+        val_list: lists/modelnet/val.txt
+      state:
+        dataset: modelnet
+        evaluation_resolution: 128
+        feature_grid_resolution: 128
+        grid_resolution: 128
+        grid_resolution_load: 128
+        key: outlier_blob_depth
+        load_smooth: false
+        noise: 0.001
+        noise_scale: 0.01
+        outlier_fraction: 0.9
+        outlier_scale: 5
+        resx: 320
+        resy: 240
+        sparsity: 0.01
+        test_list: lists/modelnet/test.txt
+        train_list: lists/modelnet/train.txt
+        val_list: lists/modelnet/val.txt
+    DATABASE: &id008 !!python/object/new:easydict.EasyDict
+      dictitems:
+        evaluation_resolution: 128
+        feature_grid_resolution: 128
+        grid_resolution: 128
+        grid_resolution_load: 128
+        n_features: 9
+        repeat: 10
+      state:
+        evaluation_resolution: 128
+        feature_grid_resolution: 128
+        grid_resolution: 128
+        grid_resolution_load: 128
+        n_features: 9
+        repeat: 10
+    LOSS: &id009 !!python/object/new:easydict.EasyDict
+      dictitems:
+        clamp: true
+        clamp_est: false
+        cls: true
+        latent_reg: true
+        mask: all
+        mask_dilation_iterations: 0
+        max_clamp: 0.02
+        min_clamp: -0.02
+        reinitialize: false
+        scale: 1000.0
+        sdf: false
+        wl1: 1.0
+        wl2: 10.0
+        wlocc: 0.01
+        wlreg: 1.0
+      state:
+        clamp: true
+        clamp_est: false
+        cls: true
+        latent_reg: true
+        mask: all
+        mask_dilation_iterations: 0
+        max_clamp: 0.02
+        min_clamp: -0.02
+        reinitialize: false
+        scale: 1000.0
+        sdf: false
+        wl1: 1.0
+        wl2: 10.0
+        wlocc: 0.01
+        wlreg: 1.0
+    OPTIMIZATION: &id010 !!python/object/new:easydict.EasyDict
+      dictitems:
+        alternate: false
+        burn_in: 10
+        clip: true
+        curriculum: false
+        frequency: 5
+        joint: false
+        mask_switch: 0
+        pipeline: &id001 !!python/object/new:easydict.EasyDict
+          dictitems:
+            alpha: 0.99
+            eps: 1.0e-10
+            lr: 0.01
+            momentum: 0.9
+            start: 0
+            step_size: 2000
+            weight_decay: 0.0
+          state:
+            alpha: 0.99
+            eps: 1.0e-10
+            lr: 0.01
+            momentum: 0.9
+            start: 0
+            step_size: 2000
+            weight_decay: 0.0
+        renderer: &id002 !!python/object/new:easydict.EasyDict
+          dictitems:
+            alpha: 0.99
+            eps: 1.0e-10
+            lr: 0.01
+            momentum: 0.9
+            start: 10
+            step_size: 2000
+            weight_decay: 0.0
+          state:
+            alpha: 0.99
+            eps: 1.0e-10
+            lr: 0.01
+            momentum: 0.9
+            start: 10
+            step_size: 2000
+            weight_decay: 0.0
+        scheduler: &id003 !!python/object/new:easydict.EasyDict
+          dictitems:
+            cooldown: 5
+            gamma: 0.999
+            mode: max
+            patience: 20
+            schedule: true
+            threshold: 0.01
+            threshold_mode: rel
+          state:
+            cooldown: 5
+            gamma: 0.999
+            mode: max
+            patience: 20
+            schedule: true
+            threshold: 0.01
+            threshold_mode: rel
+      state:
+        alternate: false
+        burn_in: 10
+        clip: true
+        curriculum: false
+        frequency: 5
+        joint: false
+        mask_switch: 0
+        pipeline: *id001
+        renderer: *id002
+        scheduler: *id003
+    PIPELINE: &id011 !!python/object/new:easydict.EasyDict
+      dictitems:
+        FUSION: &id004 !!python/object/new:easydict.EasyDict
+          dictitems:
+            activation: torch.nn.Tanh()
+            depth: true
+            direction: true
+            encoder_filter_size: 3
+            extraction: nearest
+            integration: nearest
+            n_layers: 4
+            n_samples: 3
+            net: FusionNet
+            normalization: layer
+            position: false
+            resx: 320
+            resy: 240
+            uncertainty: false
+          state:
+            activation: torch.nn.Tanh()
+            depth: true
+            direction: true
+            encoder_filter_size: 3
+            extraction: nearest
+            integration: nearest
+            n_layers: 4
+            n_samples: 3
+            net: FusionNet
+            normalization: layer
+            position: false
+            resx: 320
+            resy: 240
+            uncertainty: false
+        RENDERER: &id005 !!python/object/new:easydict.EasyDict
+          dictitems:
+            activation: torch.nn.Tanh()
+            conf_head: false
+            kernel: 5
+            mode: float
+            normal_head: false
+            occ_head: true
+            output_scale: 0.02
+            sdf_head: true
+            superresolve: false
+          state:
+            activation: torch.nn.Tanh()
+            conf_head: false
+            kernel: 5
+            mode: float
+            normal_head: false
+            occ_head: true
+            output_scale: 0.02
+            sdf_head: true
+            superresolve: false
+        minimal_gpu: false
+        n_features: 9
+        renderer: standard
+        routing: false
+        routing_threshold: 0.8
+        superresolution: false
+        update: true
+        use_count: true
+        use_count_renderer: true
+      state:
+        FUSION: *id004
+        RENDERER: *id005
+        minimal_gpu: false
+        n_features: 9
+        renderer: standard
+        routing: false
+        routing_threshold: 0.8
+        superresolution: false
+        update: true
+        use_count: true
+        use_count_renderer: true
+    SETTINGS: &id012 !!python/object/new:easydict.EasyDict
+      dictitems:
+        data_path: /cluster/project/infk/cvg/weders/data/modelnet/processed
+        experiment_path: /cluster/project/infk/cvg/weders/projects/002/experiments_clean
+        name: modelnet_outliers_9
+      state:
+        data_path: /cluster/project/infk/cvg/weders/data/modelnet/processed
+        experiment_path: /cluster/project/infk/cvg/weders/projects/002/experiments_clean
+        name: modelnet_outliers_9
+    TESTING: &id013 !!python/object/new:easydict.EasyDict
+      dictitems:
+        batch_size: 1
+        prefix: configs/tests
+        shuffle: false
+        tests: &id006
+        - shapenet.plane.noise.00.yaml
+        - shapenet.plane.noise.005.yaml
+      state:
+        batch_size: 1
+        prefix: configs/tests
+        shuffle: false
+        tests: *id006
+    TRAINING: &id014 !!python/object/new:easydict.EasyDict
+      dictitems:
+        accumulate_steps: 8
+        batch_size: 1
+        interpolation: true
+        latent_noise: false
+        n_epochs: 200
+        n_points: 4
+        oversampling: false
+        shuffle: true
+        stop_batch: -1
+      state:
+        accumulate_steps: 8
+        batch_size: 1
+        interpolation: true
+        latent_noise: false
+        n_epochs: 200
+        n_points: 4
+        oversampling: false
+        shuffle: true
+        stop_batch: -1
+    VALIDATION: &id015 !!python/object/new:easydict.EasyDict
+      dictitems:
+        batch_size: 1
+        shuffle: true
+      state:
+        batch_size: 1
+        shuffle: true
+  state:
+    DATA: *id007
+    DATABASE: *id008
+    LOSS: *id009
+    OPTIMIZATION: *id010
+    PIPELINE: *id011
+    SETTINGS: *id012
+    TESTING: *id013
+    TRAINING: *id014
+    VALIDATION: *id015

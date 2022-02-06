@@ -1,0 +1,13 @@
+table	0010
+table	0008
+sofa	0009
+sofa	0005
+monitor	0003
+desk	0006
+desk	0003
+chair	0010
+chair	0008
+chair	0007
+chair	0004
+chair	0001
+bathtub	0001
