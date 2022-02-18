@@ -1,8 +1,21 @@
 # NeuralFusion
 
-This is the official implementation of [NeuralFusion: Online Depth Map Fusion in Latent Space](https://arxiv.org/abs/2011.14791). We provide code to train the proposed pipeline on ShapeNet, ModelNet, as well as Tanks and Temples.
+This is the official implementation of [NeuralFusion: Online Depth Map Fusion in Latent Space](silvanweder.com/publications/neural-fusion/). We provide code to train the proposed pipeline on ShapeNet, ModelNet, as well as Tanks and Temples.
 
 If you plan to use NeuralFusion for commercial purposes, please contact the author first. For more information, please also see the license.
+
+If you find our code or paper useful, please consider citing
+
+```
+@InProceedings{Weder_2021_CVPR,
+    author    = {Weder, Silvan and Schonberger, Johannes L. and Pollefeys, Marc and Oswald, Martin R.},
+    title     = {NeuralFusion: Online Depth Fusion in Latent Space},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2021},
+    pages     = {3162-3172}
+}
+```
 
 ## Installation
 
